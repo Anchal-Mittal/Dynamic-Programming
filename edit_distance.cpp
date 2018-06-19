@@ -7,14 +7,14 @@ int lcs(string str1,string str2,int l1,int l2){
 	for(int i=0;i<=l1;i++){
 		for(int j=0;j<=l2;j++){
 			if(i==0)
-				matrix[i][j]=l2;
+				matrix[i][j]=j;
 			else if(j==0)
-				matrix[i][j]=l1;
+				matrix[i][j]=i;
 				
 			else if(str1[i-1]==str2[j-1])
-				matrix[i][j]=lcs(str1,str2,i-1,j-1);
+				matrix[i][j]=matrix[i-1][j-1];
 			else 
-			matrix[i][j]=min(min(lcs(str1,str2,i-1,j-1),lcs(str1,str2,i-1,j)),lcs(str1,str2,i-1,j-1))+1;
+			matrix[i][j]=1+min(min(matrix[i-1][j],matrix[i-1][j-1]),matrix[i][j-1]);
 			
 		}
 	}
@@ -30,6 +30,6 @@ int  main(){
 	int l2=str2.length();
 	
 	int length=lcs(str1,str2,l1,l2)	;
-	cout << "THE EDIT DISTANCE IS "<<length<< endl;
+	cout << "THE EDIT DISTANCE IS 	"<<length<< endl;
 	return 0;
 }
